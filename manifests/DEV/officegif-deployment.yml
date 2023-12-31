@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name:  officegif
-        image:  gcr.io/officegif/officegif:4f95d3ca191aabfcc37a7c1f39a6dad4005731a3
+        image:  gcr.io/officegif/officegif:f129edb82ed86d0b7fa7f92e793b4820208fc58e
         resources:
           requests:
             cpu: 100m
@@ -38,11 +38,11 @@ spec:
             configMapKeyRef:
               name: officegif
               key: MESSAGE
-        - name: GIPHY_API_KEY
+        - name: SECRETCODE
           valueFrom:
             secretKeyRef:
               name: officegif
-              key: GIPHY_API_KEY
+              key: SECRETCODE
         ports:
         - containerPort: 5000
           name: officegif-app
