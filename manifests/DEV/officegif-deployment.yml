@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name:  officegif
-        image:  gcr.io/officegif/officegif:5af477a45f4937cadc9e36c3a80e7fc08270170c
+        image:  gautham990/officegif:1.0.0
         resources:
           requests:
             cpu: 100m
