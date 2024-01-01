@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: officegif-dev
+spec:
+  destination:
+    name: ''
+    namespace: officegif-dev
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: ./manifests/DEV
+    repoURL: 'https://github.com/gautham990/officegif_deploy.git'
+    targetRevision: HEAD
+  sources: []
+  project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
