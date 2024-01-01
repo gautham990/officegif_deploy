@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  officegif
+  namespace: officegif-dev
+  labels:
+    app: officegif
+    env: dev
+    release: v1.0.0
+spec:
+  selector:
+    matchLabels:
+      app: officegif
+  replicas: 3
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: officegif
+    spec:
+      containers:
+      - name:  officegif
+        image:  gcr.io/officegif/officegif:5af477a45f4937cadc9e36c3a80e7fc08270170c
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+          limits:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name: MESSAGE
+          valueFrom:
+            configMapKeyRef:
+              name: officegif
+              key: MESSAGE
+        - name: SECRETCODE
+          valueFrom:
+            secretKeyRef:
+              name: officegif
+              key: SECRETCODE
+        ports:
+        - containerPort: 5000
+          name: officegif-app
+      restartPolicy: Always
