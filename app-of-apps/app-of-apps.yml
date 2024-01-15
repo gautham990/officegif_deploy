@@ -4,11 +4,15 @@ metadata:
   name: officegif
   namespace: argocd
 spec:
+  project: default
   destination:
     namespace: argocd
     server: 'https://kubernetes.default.svc'
-  project: default
   source:
     path: ./apps
     repoURL: https://github.com/gautham990/officegif_deploy.git
     targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
